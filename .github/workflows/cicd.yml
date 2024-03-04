@@ -1,4 +1,4 @@
-name: Deploy Server Side Node Application
+name: Deploy Client Side React Application
 
 on:
   push:
