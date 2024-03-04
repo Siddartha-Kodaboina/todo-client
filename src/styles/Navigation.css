@@ -1,0 +1,38 @@
+.navigation-main{
+  width: 100%;
+  height: 10vh;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px;
+  align-items: center;
+}
+
+.right{
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout {
+  background-color: #4CAF50; /* Light green background for the button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.logout:hover {
+  box-shadow: 0 0 15px #4CAF50; /* Glowing effect on hover */
+}
+
+.logout:focus {
+  box-shadow: 0 0 15px #4CAF50; /* Glowing effect on focus */
+}

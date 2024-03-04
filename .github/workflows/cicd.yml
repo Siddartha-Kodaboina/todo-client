@@ -15,7 +15,16 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
-        run: docker build -t stevesiddu49/todo-client . --build-arg REACT_APP_NODE_ENV='production' --build-arg REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL }}'
+        run: docker build -t stevesiddu49/todo-client . 
+          --build-arg REACT_APP_NODE_ENV='production'
+          --build-arg REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL }}'
+          --build-arg REACT_APP_FIREBASE_API_KEY='${{ secrets.REACT_APP_FIREBASE_API_KEY }}'
+          --build-arg REACT_APP_FIREBASE_AUTH_DOMAIN='${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}'
+          --build-arg REACT_APP_FIREBASE_PROJECT_ID='${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}'
+          --build-arg REACT_APP_FIREBASE_STORAGE_BUCKET='${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}'
+          --build-arg REACT_APP_FIREBASE_MESSAGING_SENDER_ID='${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}'
+          --build-arg REACT_APP_FIREBASE_APP_ID='${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
+          --build-arg REACT_APP_FIREBASE_MEASUREMENT_ID='${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID }}'
       - name: Publish image to dockerhub
         run: docker push stevesiddu49/todo-client:latest
   deploy:
