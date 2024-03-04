@@ -21,5 +21,5 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY --from=build /app/build/ .
 EXPOSE 80
-ENTRYPOINT ["nginx", "-g", "demon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
