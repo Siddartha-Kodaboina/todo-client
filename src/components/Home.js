@@ -11,7 +11,7 @@ const Home = ({base_url}) => {
     const user = useFirebaseUser();
     const [displayTasks, setDisplayTasks] = useState([]);
 
-    console.log(base_url);
+    // console.log(base_url);
 
     const insertTodoItem=async (todoInfo)=>{
         try{
@@ -129,8 +129,8 @@ const Home = ({base_url}) => {
                                 classes.push("active");
                             }
                             return (
-                                <li key={index} onClick={()=> setActiveListItem(index)}className={classes.join(' ')}>
-                                    {value}  <p>{displayTasks.filter(todo=> todo.todoInfo.status_code === activeListItem).length}</p>
+                                <li key={index} onClick={()=> setActiveListItem(index)} className={classes.join(' ')}>
+                                    {value}  <p>{displayTasks.filter(todo=> todo.todoInfo.status_code === index).length}</p>
                                 </li>
                             );
                         })}
