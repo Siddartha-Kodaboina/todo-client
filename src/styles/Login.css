@@ -84,10 +84,16 @@
   margin-bottom: 2rem;
 }
 
+.sign-in-button{
+  display: flex;
+  justify-content: center;
+  /* padding: 0px 70px; */
+}
 .sign-in-button button {
   background-color: #000;
   color: #fff; 
-  padding: 10px 20px;
+  width: 100%;
+  padding: 10px 70px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -113,18 +119,20 @@
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  width: 100%;
 }
 .sign-in-with-google button{
   text-decoration: none;
   background: none;
   border: none;
   display: flex;
+  width: 100%;
   cursor: pointer;
   /* text-align: center; */
   border: 2px solid rgb(10, 166, 245);
   border-radius: 5px;
   padding: 10px 20px;
-  
+  justify-content: center;
 }
 
 .sign-in-with-google button:hover{
@@ -153,4 +161,9 @@
     width: 100%;
     height:none;
   }
+}
+
+.or{
+  display: flex;
+  justify-content: center;;
 }
