@@ -11,7 +11,7 @@ const Home = ({base_url}) => {
     const user = useFirebaseUser();
     const [displayTasks, setDisplayTasks] = useState([]);
 
-
+    console.log(base_url);
 
     const insertTodoItem=async (todoInfo)=>{
         try{
