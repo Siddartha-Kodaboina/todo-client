@@ -1,0 +1,97 @@
+.todo-banner {
+  position: absolute;
+  width: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #20232a; /* or whatever the background color is */
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 99;
+  color: #fff; /* assuming a light text color */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* for a subtle shadow */
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.todo-tab {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.todo-tab.todo-active {
+  border-color: #61dafb; 
+}
+
+.info-section h2 {
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background: #333;
+  color: #fff;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  background: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancel,
+.save {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel {
+  /* background: #555; */
+}
+
+.save {
+  background: #61dafb;
+  color: #20232a;
+}

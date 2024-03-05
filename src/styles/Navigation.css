@@ -8,10 +8,17 @@
   align-items: center;
 }
 
+.left{
+  flex: 5;
+}
 .right{
   display: flex;
+  flex: 2;
   justify-content: space-between;
+  align-items: center;
 }
+
+/* right */
 
 .logout {
   background-color: #4CAF50; /* Light green background for the button */
