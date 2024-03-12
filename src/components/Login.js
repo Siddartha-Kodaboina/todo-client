@@ -1,8 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/Login.css';
-import { signInWithGoogle } from '../services/googleAuthService';
+import { signInWithGoogle, signUpWithEmailAndPassword, signInWithCustomEmailAndPassword } from '../services/googleAuthService';
 
 const Login = () => {
+    // const 
+    const [isLoginOn, setIsLoginOn] = useState(true);
+    const [credentials, setCredentials] = useState({
+        user_name: '',
+        user_pwd: ''
+    })
+
+    const handleChange = (e) => {
+        setCredentials({
+            ...credentials, 
+            [e.target.name]: e.target.value
+        })
+    };
+
+    const validateCredentials = () => {
+        for (const [key, value] of Object.entries(credentials)) {
+            if (value === ''){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    const handleClick = (button_type) => {
+        if (!validateCredentials()){
+            alert("Please enter both username and password.");
+            return;
+        }
+        if(button_type === 'sign_in'){
+            signInWithCustomEmailAndPassword(credentials);
+        }
+        else if (button_type === 'sign_up'){
+            signUpWithEmailAndPassword(credentials);
+        }
+    }
+
   return (
     <div className="login-main">
         <div className="content-wrapper">
@@ -25,15 +61,22 @@ const Login = () => {
                     <div className="login-form">
                         <div className="user-email">
                             <label htmlFor="">Username or email</label>
-                            <input type="text" />
+                            <input name="user_name" value={credentials.user_name} onChange={handleChange} type="text" />
                         </div>
                         <div className="password">
                             <label htmlFor="">Password</label>
-                            <input type="password" name="" id="" />
+                            <input name="user_pwd" value={credentials.user_pwd} onChange={handleChange} type="password"/>
                             <a href="#" id="forgot-password">forgot password</a>
                         </div>
+                        
                         <div className="sign-in-button">
-                            <button>Sign in</button> 
+                            {
+                                isLoginOn?
+                                <button onClick={()=>handleClick('sign_in')}>Sign in</button> 
+                                :
+                                <button onClick={()=>handleClick('sign_up')}>Sign up</button>
+                            }
+                            
                         </div>
                         <div className="or">
                             <span class="or-before"></span>
@@ -45,7 +88,13 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="create-account">
-                        <a href="#">Are you new? Create an Account</a> {/* Added this line */}
+                        {
+                            isLoginOn?
+                            <a onClick={()=>setIsLoginOn(false)} href="#">Are you new? Create an Account</a> 
+                            :
+                            <a onClick={()=>setIsLoginOn(true)} href="#">Already have an account? Login</a>
+                        }
+                        
                     </div>
                 </div>
             </div>

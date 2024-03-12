@@ -1,6 +1,6 @@
 // This file would export signInWithGoogle function used above
 import { auth, provider } from '../config/firebaseConfig';
-import {signInWithPopup} from 'firebase/auth';
+import {signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
@@ -19,5 +19,41 @@ export const signInWithGoogle = () => {
     })
     .catch((error) => {
       console.error("Error during sign in: ", error);
+      
+    });
+};
+
+export const signUpWithEmailAndPassword = ({user_name, user_pwd}) => {
+  console.log('signUpWithEmailAndPassword');
+  console.log(user_name, user_pwd);
+  createUserWithEmailAndPassword(auth, user_name, user_pwd)
+    .then((result) => {
+      // Sign Up
+      const user = result.user;
+      if (user.displayName === null){
+        user.displayName = user.email
+      }
+      console.log("User Created", user);
+    })
+    .catch((error) => {
+      console.error("Error during sign up signUpWithEmailAndPassword: ", error);
+    });
+};
+
+export const signInWithCustomEmailAndPassword = ({user_name, user_pwd}) => {
+  console.log('signInWithEmailAndPassword');
+  console.log(user_name, user_pwd);
+  signInWithEmailAndPassword(auth, user_name, user_pwd)
+    .then((result) => {
+      // Sign Up
+      const user = result.user;
+      if (user.displayName === null){
+        user.displayName = user.email
+      }
+      console.log("User Logged In", user);
+    })
+    .catch((error) => {
+      console.error("Error during sign in signInWithEmailAndPassword: ", error);
+      alert(error.message);
     });
 };
