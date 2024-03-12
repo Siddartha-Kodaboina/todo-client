@@ -37,6 +37,7 @@ export const signUpWithEmailAndPassword = ({user_name, user_pwd}) => {
     })
     .catch((error) => {
       console.error("Error during sign up signUpWithEmailAndPassword: ", error);
+      alert(error.message);
     });
 };
 
