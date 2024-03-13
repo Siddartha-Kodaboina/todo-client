@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import '../styles/Login.css';
-import { signInWithGoogle, signUpWithEmailAndPassword, signInWithCustomEmailAndPassword } from '../services/googleAuthService';
+import { sendThePasswordResetEmail } from '../services/googleAuthService';
 
-const Login = () => {
-    // const 
-    const [isLoginOn, setIsLoginOn] = useState(true);
+const ForgotPassword = () => {
     const [credentials, setCredentials] = useState({
-        user_name: '',
-        user_pwd: ''
+        user_email: ''
     })
+    const [sent, setSent] = useState(false);
 
     const handleChange = (e) => {
         setCredentials({
@@ -28,14 +26,13 @@ const Login = () => {
 
     const handleClick = (button_type) => {
         if (!validateCredentials()){
-            alert("Please enter both username and password.");
+            alert("Please enter email address");
             return;
         }
-        if(button_type === 'sign_in'){
-            signInWithCustomEmailAndPassword(credentials);
-        }
-        else if (button_type === 'sign_up'){
-            signUpWithEmailAndPassword(credentials);
+        if(button_type === 'submit'){
+            sendThePasswordResetEmail(credentials);
+            alert("Password reset email sent!");
+            setSent(true);
         }
     }
 
@@ -59,42 +56,31 @@ const Login = () => {
                         <h2>Get It Done ✅</h2>
                     </div>
                     <div className="login-form">
+
+                        {
+                            sent &&
+                            <div className="sent-message">
+                                <p>Password reset email sent!</p>
+                            </div>
+                        }
                         <div className="user-email">
-                            <label htmlFor="">Username or email</label>
-                            <input name="user_name" value={credentials.user_name} onChange={handleChange} type="text" />
-                        </div>
-                        <div className="password">
-                            <label htmlFor="">Password</label>
-                            <input name="user_pwd" value={credentials.user_pwd} onChange={handleChange} type="password"/>
-                            <a href="/forgot-password" id="forgot-password">forgot password</a>
+                            <label htmlFor="">Enter your email</label>
+                            <input type="email" name="user_email" value={credentials.user_email} onChange={handleChange}  />
                         </div>
                         
                         <div className="sign-in-button">
-                            {
-                                isLoginOn?
-                                <button onClick={()=>handleClick('sign_in')}>Sign in</button> 
-                                :
-                                <button onClick={()=>handleClick('sign_up')}>Sign up</button>
-                            }
-                            
+                            <button onClick={()=>handleClick('submit')}>Submit</button> 
                         </div>
+
                         <div className="or">
                             <span class="or-before"></span>
                             <p>or</p>
                             <span class="or-after"></span>
                         </div>
-                        <div className="sign-in-with-google">
-                            <button onClick={signInWithGoogle}><img src="./images/google-icon.png" alt="Google Logo"  /> {'    '} Sign in with Google</button>
-                        </div>
+                        
                     </div>
                     <div className="create-account">
-                        {
-                            isLoginOn?
-                            <a onClick={()=>setIsLoginOn(false)} href="#">Are you new? Create an Account</a> 
-                            :
-                            <a onClick={()=>setIsLoginOn(true)} href="#">Already have an account? Login</a>
-                        }
-                        
+                        <a href="/login">Back to Login</a> 
                     </div>
                 </div>
             </div>
@@ -103,4 +89,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default ForgotPassword;

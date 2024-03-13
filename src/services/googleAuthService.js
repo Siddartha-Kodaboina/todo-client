@@ -1,6 +1,6 @@
 // This file would export signInWithGoogle function used above
 import { auth, provider } from '../config/firebaseConfig';
-import {signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+import {signInWithPopup, confirmPasswordReset, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail} from 'firebase/auth';
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
@@ -55,6 +55,34 @@ export const signInWithCustomEmailAndPassword = ({user_name, user_pwd}) => {
     })
     .catch((error) => {
       console.error("Error during sign in signInWithEmailAndPassword: ", error);
+      alert(error.message);
+    });
+};
+
+export const sendThePasswordResetEmail = ({user_email}) => {
+  console.log('sendThePasswordResetEmail');
+  console.log(user_email);
+  sendPasswordResetEmail(auth, user_email)
+    .then(() => {
+      console.log("Email sent");
+    })
+    .catch((error) => {
+      console.error("Error during sign in sendThePasswordResetEmail: ", error);
+      alert(error.message);
+    });
+};
+
+
+
+export const confirmThePasswordReset = ({oobCode, new_password}) => {
+  console.log('confirmThePasswordReset');
+  console.log(oobCode, new_password);
+  confirmPasswordReset(auth, oobCode, new_password)
+    .then(() => {
+      console.log("Password rest successful!");
+    })
+    .catch((error) => {
+      console.error("Error during sign in confirmThePasswordReset: ", error);
       alert(error.message);
     });
 };
