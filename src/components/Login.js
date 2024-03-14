@@ -72,9 +72,9 @@ const Login = () => {
                         <div className="sign-in-button">
                             {
                                 isLoginOn?
-                                <button onClick={()=>handleClick('sign_in')}>Sign in</button> 
+                                <button onClick={()=>handleClick('sign_in')} >Sign in</button> 
                                 :
-                                <button onClick={()=>handleClick('sign_up')}>Sign up</button>
+                                <button onClick={()=>handleClick('sign_up')} >Sign up</button>
                             }
                             
                         </div>
