@@ -4,16 +4,18 @@
   border: 1px solid black;
   display: flex;
   justify-content: space-between;
-  padding: 10px 40px;
+  /* padding: 10px 40px; */
   align-items: center;
 }
 
 .left{
-  flex: 5;
+  /* flex: 5; */
+  margin-left: 5vw;
 }
 .right{
   display: flex;
-  flex: 2;
+  /* flex: 2; */
+  margin-right: 5vw;
   justify-content: space-between;
   align-items: center;
 }
@@ -34,6 +36,7 @@
   position: relative;
   transition: all 0.3s ease;
   outline: none;
+  margin-left: 3vw;
 }
 
 .logout:hover {
@@ -42,4 +45,17 @@
 
 .logout:focus {
   box-shadow: 0 0 15px #4CAF50; /* Glowing effect on focus */
+}
+
+@media only screen and (max-width: 600px){
+  .left h2{
+    font-size: 18px;
+    margin-right: 3vw;
+  }
+}
+
+@media only screen and (max-width: 450px){
+  .left h2{
+    font-size: 16px;
+  }
 }

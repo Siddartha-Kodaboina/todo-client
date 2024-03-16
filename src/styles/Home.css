@@ -6,7 +6,7 @@
   background: rgb(234, 253, 240);
   display: flex;
   justify-content: center;
-  border: 5px solid black;
+  /* border: 5px solid black; */
   /* align-items: center; */
 }
 
@@ -87,3 +87,70 @@
   border-bottom: 1px solid rgb(224, 184, 184);
 }
 
+.todo-item-left{
+  flex: 4;
+}
+
+.todo-item-right{
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.edit-todo-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #4CAF50; /* Light green background for the button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.edit-todo-button:hover {
+  box-shadow: 0 0 15px #4CAF50; /* Glowing effect on hover */
+}
+
+.edit-todo-button:focus {
+  box-shadow: 0 0 15px #4CAF50; /* Glowing effect on focus */
+}
+
+@media only screen and (max-width: 600px){
+  .home-container{
+    width: 95%;
+    /* height: 100%; */
+    /* border: 1px solid red; */
+    margin-top: 10vh;
+  }
+  .todo-list{
+    margin-top: 5px;
+  }
+  .todo-item{
+    flex-direction: column;
+    padding: 10px 5px;
+  }
+  .todo-item-right{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0;
+    /* border: 1px solid red; */
+    /* flex-direction: space-between; */
+  }
+  .edit-todo-button{
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+}

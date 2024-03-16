@@ -1,17 +1,22 @@
 import React, {useState} from 'react';
 import '../styles/TodoComponent.css';
 
-const TodoComponent = ({ toggleBanner }) => {
+const TodoComponent = ({ toggleBanner, todoObject=null }) => {
   // Dummy data for categories and tags, replace with your own logic
     const tags = ["XDR mode", "HDR", "Mac 3 Pro"];
+    console.log("todoObject in todoObject", todoObject);
+    const update = todoObject!==null? 'update': 'create';
     const callToggleBanner = (e) => {
         if (e.target.name === "save") {
-            toggleBanner(data);
+            toggleBanner(data, todoObject, update);
         }else{
-            toggleBanner();
+            toggleBanner(undefined, undefined, update);
         }
     }
-    const [data, setData] = useState({});
+    const [data, setData] = useState({
+      task: todoObject!==null ? todoObject.todoInfo.task: '',
+      description: todoObject!==null ? todoObject.todoInfo.description: '',
+    });
     const handleChange = (e) => {
         const {name, value} = e.target;
         setData({ ...data, [name]: value });

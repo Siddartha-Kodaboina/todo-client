@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react';
 import TodoComponent from './TodoComponent';
 import '../styles/Home.css';
 import useFirebaseUser from '../hooks/useFirebaseUser';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 const Home = ({base_url}) => {
     const listItems = ["Todo", "In-progress", "Done"]
     const [listItemCounts, setItemCounts] = useState([0, 0, 0]);
     const [activeListItem, setActiveListItem] = useState(0);
     const [banner, setBanner] = useState(false);
+    const [updateBanner, setUpdateBanner] = useState(false);
     const user = useFirebaseUser();
     const [displayTasks, setDisplayTasks] = useState([]);
 
@@ -75,15 +77,14 @@ const Home = ({base_url}) => {
         }
     };
 
-    const updateTodoStatus = async (todoId, newStatus, newStatusCode) => {
-        console.log("Updating status: " + newStatusCode);
+    const updateTodoStatus = async (todoObject) => {
         try {
-            await fetch(`${base_url}/api/todo/${todoId}`, {
+            await fetch(`${base_url}/api/todo/${todoObject._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ status: newStatus, status_code: newStatusCode })
+                body: JSON.stringify({ todoInfo: todoObject.todoInfo})
             })
             .then(response => {
                 if (!response.ok) {
@@ -109,13 +110,32 @@ const Home = ({base_url}) => {
         }
     }, [activeListItem, user]); 
     
-
-    const toggleBanner = (todoInfo=null) =>{
-        console.log("Toggle Banner");
-        setBanner(!banner);
-        // console.log(todoInfo);
-        if (todoInfo){
-            insertTodoItem(todoInfo);
+    // todoObject = null meanes we are inserting a new items
+    // todoObject != null menas we updating an existing item 
+    const toggleBanner = (todoInfo=null, todoObject=null, bannerType='create') =>{
+        console.log("Toggle Banner ", bannerType);
+        if (bannerType==='create'){
+            setBanner(!banner);
+        }
+        else if (bannerType==='update'){
+            setUpdateBanner(!updateBanner);
+        }
+        
+        
+        if (todoInfo) {
+            if (todoObject===null) {
+                insertTodoItem(todoInfo);
+            }
+            else{
+                updateTodoStatus({
+                    ...todoObject,
+                    todoInfo : {
+                        ...todoObject.todoInfo,
+                        task: todoInfo.task,
+                        description: todoInfo.description
+                    }
+                });
+            }
         }
     }
     return (
@@ -159,8 +179,15 @@ const Home = ({base_url}) => {
                                         <select
                                             value={todo.todoInfo.status}
                                             onChange={(e) => {
-                                            const [newStatus, newStatusCode] = e.target.value.split(',');
-                                            updateTodoStatus(todo._id, newStatus, parseInt(newStatusCode));
+                                                const [newStatus, newStatusCode] = e.target.value.split(',');
+                                                updateTodoStatus({
+                                                    ...todo, 
+                                                    todoInfo: {
+                                                        ...todo.todoInfo,
+                                                        status: newStatus,
+                                                        status_code: parseInt(newStatusCode)
+                                                    }
+                                                });
                                             }}
                                         >   
                                             {listItems.filter(item => item.toLowerCase() === todo.todoInfo.status).map((status, idx) => (
@@ -170,7 +197,16 @@ const Home = ({base_url}) => {
                                                 <option key={idx} value={`${status.toLowerCase()},${listItems.indexOf(status)}`}>{status}</option>
                                             ))}
                                         </select>
+                                        
                                     </div>
+                                    <div className="edit-todo">
+                                            
+                                            <button className="edit-todo-button" onClick={(e)=>toggleBanner(undefined, undefined, 'update')}><EditNoteIcon style={{marginRight: '10px'}}/> Edit</button>
+                                            {
+                                                updateBanner && 
+                                                <TodoComponent toggleBanner={toggleBanner} todoObject={todo} />
+                                            }
+                                        </div>
                                 </div>
                             </div>
                         ))}
