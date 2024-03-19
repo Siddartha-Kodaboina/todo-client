@@ -66,6 +66,37 @@
   border-radius: 5px;
 }
 
+.addTodo-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #4CAF50; /* Light green background for the button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.addTodo-button:hover{
+  box-shadow: 0 0 15px #4CAF50;
+}
+
+.addTodo-button:focus{
+  box-shadow: 0 0 15px #4CAF50;
+}
+
+.addTodo-button-p2{
+  display: none;
+}
+
 .addTodo{
   flex: 1;
   display: flex;
@@ -152,5 +183,13 @@
     padding: 5px 10px;
     font-size: 16px;
     border-radius: 5px;
+  }
+
+  .addTodo-button-p1{
+    display: none;
+  }
+
+  .addTodo-button-p2{
+    display: block;
   }
 }

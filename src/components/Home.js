@@ -156,7 +156,7 @@ const Home = ({base_url}) => {
                         })}
                     </ul>
                     <div className="addTodo">
-                        <button onClick={toggleBanner}>Add Todo</button>
+                        <button className="addTodo-button" onClick={toggleBanner}> <p className='addTodo-button-p1'>Add Todo</p><p className='addTodo-button-p2'>+</p></button>
                         {
                             banner && 
                             <TodoComponent toggleBanner={toggleBanner} />
