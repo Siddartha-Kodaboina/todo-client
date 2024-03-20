@@ -95,3 +95,34 @@
   background: #61dafb;
   color: #20232a;
 }
+
+
+input[type="datetime-local"] {
+  background-color: black;
+  color: white;
+  /* Additional styling to affect the inner parts of the date picker */
+  /* This may not be fully supported in all browsers */
+}
+
+/* Styling the calendar dropdown */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Styling for Firefox */
+input[type="datetime-local"]::-moz-datetime-edit, 
+input[type="datetime-local"]::-moz-datetime-edit-fields-wrapper, 
+input[type="datetime-local"]::-moz-datetime-edit-text, 
+input[type="datetime-local"]::-moz-datetime-edit-month-field, 
+input[type="datetime-local"]::-moz-datetime-edit-day-field, 
+input[type="datetime-local"]::-moz-datetime-edit-year-field {
+  background-color: black;
+  color: white;
+}
+
+/* Styling for IE */
+input[type="datetime-local"]::-ms-clear,
+input[type="datetime-local"]::-ms-reveal {
+  color: white;
+  background-color: black;
+}

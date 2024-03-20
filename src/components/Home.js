@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import TodoComponent from './TodoComponent';
+import moment from 'moment-timezone';
 import '../styles/Home.css';
 import useFirebaseUser from '../hooks/useFirebaseUser';
 import EditNoteIcon from '@mui/icons-material/EditNote';
@@ -13,12 +14,19 @@ const Home = ({base_url}) => {
     const user = useFirebaseUser();
     const [displayTasks, setDisplayTasks] = useState([]);
 
-    // console.log(base_url);
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log(userTimeZone);
 
     const insertTodoItem=async (todoInfo)=>{
         try{
             todoInfo.status = "todo";
             todoInfo.status_code = 0;
+            
+            /* Get the Users Timezone to convert it to UTC in the backend*/
+            if (todoInfo.remainderTime){
+                todoInfo.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            }
+
             const body = {
                 user,
                 todoInfo
@@ -77,7 +85,7 @@ const Home = ({base_url}) => {
         }
     };
 
-    const updateTodoStatus = async (todoObject) => {
+    const updateTodo = async (todoObject) => {
         try {
             await fetch(`${base_url}/api/todo/${todoObject._id}`, {
                 method: 'PUT',
@@ -104,6 +112,14 @@ const Home = ({base_url}) => {
         }
     }
     
+    const getLocalReminderTime = (todoInfo) => {
+        // Re-instantiate the moment object from the serialized format
+        // const remainderMoment = moment.utc(todoInfo.remainderTime._d);
+  
+        // // Convert to the local time zone
+        // return remainderMoment.tz(todoInfo.timeZone).format('YYYY-MM-DDTHH:mm');
+        return moment.utc(todoInfo.remainderTime._d).tz(todoInfo.timeZone).format('YYYY-MM-DDTHH:mm');
+    }
     useEffect(() => {
         if (user) {
             fetchTodosByUser();
@@ -127,12 +143,15 @@ const Home = ({base_url}) => {
                 insertTodoItem(todoInfo);
             }
             else{
-                updateTodoStatus({
+                if (todoInfo.remainderTime){
+                    todoInfo.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                }
+                console.log("in toggleBanners todoInfo: ", todoInfo);
+                updateTodo({
                     ...todoObject,
                     todoInfo : {
                         ...todoObject.todoInfo,
-                        task: todoInfo.task,
-                        description: todoInfo.description
+                        ...todoInfo
                     }
                 });
             }
@@ -180,12 +199,16 @@ const Home = ({base_url}) => {
                                             value={todo.todoInfo.status}
                                             onChange={(e) => {
                                                 const [newStatus, newStatusCode] = e.target.value.split(',');
-                                                updateTodoStatus({
+                                                // if (todo.remainderTime){
+                                                //     todo.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                                                // }
+                                                updateTodo({
                                                     ...todo, 
                                                     todoInfo: {
                                                         ...todo.todoInfo,
                                                         status: newStatus,
-                                                        status_code: parseInt(newStatusCode)
+                                                        status_code: parseInt(newStatusCode),
+                                                        remainderTime: todo.todoInfo.remainderTime? getLocalReminderTime(todo.todoInfo): '',
                                                     }
                                                 });
                                             }}
