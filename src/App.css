@@ -10,6 +10,27 @@
   pointer-events: none;
 }
 
+.AppBody {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* adjust height as needed */
+  /* border: 5px solid black; */
+  /* background-color: red; */
+}
+
+.routes{
+  z-index: 10;
+}
+
+.particles{
+  /* width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: blue; */
+  z-index: -2;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
