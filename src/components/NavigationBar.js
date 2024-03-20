@@ -6,7 +6,7 @@ import '../styles/Navigation.css'
 
 const NavigationBar = () => {
     const user = useFirebaseUser();
-    console.log(user)
+    // console.log(user)
   return (
     <div className="navigation-main">
 

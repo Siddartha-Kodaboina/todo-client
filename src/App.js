@@ -11,7 +11,7 @@ import Particle from  './Particle';
 
 function App() {
   const user = useFirebaseUser();
-  console.log(user);
+  // console.log(user);
 
 
 

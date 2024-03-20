@@ -14,9 +14,10 @@ const Home = ({base_url}) => {
     const [updateBanner, setUpdateBanner] = useState(false);
     const user = useFirebaseUser();
     const [displayTasks, setDisplayTasks] = useState([]);
+    const [editTodo, setEditTodo] = useState({});
 
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log(userTimeZone);
+    // const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // console.log(userTimeZone);
 
     const insertTodoItem=async (todoInfo)=>{
         try{
@@ -32,7 +33,7 @@ const Home = ({base_url}) => {
                 user,
                 todoInfo
             }
-            console.log(body);
+            // console.log(body);
             await fetch(`${base_url}/api/todo`, {
                 method: 'POST',
                 headers: {
@@ -129,13 +130,15 @@ const Home = ({base_url}) => {
     
     // todoObject = null meanes we are inserting a new items
     // todoObject != null menas we updating an existing item 
-    const toggleBanner = (todoInfo=null, todoObject=null, bannerType='create') =>{
+    const toggleBanner = (todoInfo=null, todoObject=null, bannerType='create',  toBeEditedTodo=null) =>{
         console.log("Toggle Banner ", bannerType);
         if (bannerType==='create'){
             setBanner(!banner);
         }
         else if (bannerType==='update'){
+            setEditTodo(toBeEditedTodo);
             setUpdateBanner(!updateBanner);
+
         }
         
         
@@ -147,7 +150,7 @@ const Home = ({base_url}) => {
                 if (todoInfo.remainderTime){
                     todoInfo.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                 }
-                console.log("in toggleBanners todoInfo: ", todoInfo);
+                // console.log("in toggleBanners todoInfo: ", todoInfo);
                 updateTodo({
                     ...todoObject,
                     todoInfo : {
@@ -225,10 +228,10 @@ const Home = ({base_url}) => {
                                     </div>
                                     <div className="edit-todo">
                                             
-                                            <button className="edit-todo-button" onClick={(e)=>toggleBanner(undefined, undefined, 'update')}><EditNoteIcon style={{marginRight: '10px'}}/> Edit</button>
+                                            <button className="edit-todo-button" onClick={(e)=>toggleBanner(undefined, undefined, 'update', todo)}><EditNoteIcon style={{marginRight: '10px'}}/> Edit</button>
                                             {
                                                 updateBanner && 
-                                                <TodoComponent toggleBanner={toggleBanner} todoObject={todo} />
+                                                <TodoComponent toggleBanner={toggleBanner} todoObject={editTodo} />
                                             }
                                         </div>
                                 </div>

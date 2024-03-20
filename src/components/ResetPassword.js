@@ -12,8 +12,8 @@ const ResetPassword = () => {
     const searchParams = new URLSearchParams(window.location.search)
     // const [searchParams, setSearchParams] = useSearchParams();
     let oobCode= searchParams.get('oobCode');
-    console.log("queryParameters ", searchParams, oobCode);
-    console.log(searchParams);
+    // console.log("queryParameters ", searchParams, oobCode);
+    // console.log(searchParams);
 
     const handleChange = (e) => {
         setCredentials({

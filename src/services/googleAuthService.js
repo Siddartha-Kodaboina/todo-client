@@ -7,7 +7,7 @@ export const signInWithGoogle = () => {
     .then((result) => {
       // The token you receive from the sign-in process
       const token = result.credential.idToken;
-      console.log('token ', token);
+      // console.log('token ', token);
       // This part should be handled in authService.js but shown here for clarity
       fetch('/api/auth/verifyToken', {
         method: 'POST',
@@ -24,8 +24,8 @@ export const signInWithGoogle = () => {
 };
 
 export const signUpWithEmailAndPassword = ({user_name, user_pwd}) => {
-  console.log('signUpWithEmailAndPassword');
-  console.log(user_name, user_pwd);
+  // console.log('signUpWithEmailAndPassword');
+  // console.log(user_name, user_pwd);
   createUserWithEmailAndPassword(auth, user_name, user_pwd)
     .then((result) => {
       // Sign Up
@@ -42,8 +42,8 @@ export const signUpWithEmailAndPassword = ({user_name, user_pwd}) => {
 };
 
 export const signInWithCustomEmailAndPassword = ({user_name, user_pwd}) => {
-  console.log('signInWithEmailAndPassword');
-  console.log(user_name, user_pwd);
+  // console.log('signInWithEmailAndPassword');
+  // console.log(user_name, user_pwd);
   signInWithEmailAndPassword(auth, user_name, user_pwd)
     .then((result) => {
       // Sign Up
@@ -60,8 +60,8 @@ export const signInWithCustomEmailAndPassword = ({user_name, user_pwd}) => {
 };
 
 export const sendThePasswordResetEmail = ({user_email}) => {
-  console.log('sendThePasswordResetEmail');
-  console.log(user_email);
+  // console.log('sendThePasswordResetEmail');
+  // console.log(user_email);
   sendPasswordResetEmail(auth, user_email)
     .then(() => {
       console.log("Email sent");
@@ -75,8 +75,8 @@ export const sendThePasswordResetEmail = ({user_email}) => {
 
 
 export const confirmThePasswordReset = ({oobCode, new_password}) => {
-  console.log('confirmThePasswordReset');
-  console.log(oobCode, new_password);
+  // console.log('confirmThePasswordReset');
+  // console.log(oobCode, new_password);
   confirmPasswordReset(auth, oobCode, new_password)
     .then(() => {
       console.log("Password rest successful!");

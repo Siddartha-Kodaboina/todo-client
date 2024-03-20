@@ -43,9 +43,6 @@ const TodoComponent = ({ toggleBanner, todoObject=null }) => {
         setData({ ...data, [name]: value });
     };
 
-    useEffect(()=> {
-      console.log("data.remainderTime ", data.remainderTime);
-    }, [data.remainderTime])
   return (
     <div className="todo-banner">
       <div className="banner-content">
