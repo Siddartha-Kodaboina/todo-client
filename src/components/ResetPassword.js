@@ -68,11 +68,11 @@ const ResetPassword = () => {
                             </div>
                         }
                         <div className="password-1">
-                            <label htmlFor="">Enter your email</label>
+                            <label htmlFor="">Enter your new password</label>
                             <input type="password" name="password" value={credentials.password} onChange={handleChange}  />
                         </div>
                         <div className="password-2">
-                            <label htmlFor="">Enter your email</label>
+                            <label htmlFor="">Confirm your new password</label>
                             <input type="password" name="confirmPassword" value={credentials.confirmPassword} onChange={handleChange}  />
                         </div>
                         
