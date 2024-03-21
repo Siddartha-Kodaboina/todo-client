@@ -94,7 +94,7 @@ const Home = ({base_url}) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ todoInfo: todoObject.todoInfo})
+                body: JSON.stringify({ todo: todoObject})
             })
             .then(response => {
                 if (!response.ok) {
