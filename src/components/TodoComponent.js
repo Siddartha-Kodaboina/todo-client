@@ -4,7 +4,7 @@ import '../styles/TodoComponent.css';
 
 const TodoComponent = ({ toggleBanner, todoObject=null }) => {
   // Dummy data for categories and tags, replace with your own logic
-    console.log("todoObject in todoObject", todoObject);
+    // console.log("todoObject in todoObject", todoObject);
     const update = todoObject!==null? 'update': 'create';
     const [isEdited, setIsEdited] = useState(false);
     const getLocalReminderTime = (todoInfo) => {

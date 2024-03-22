@@ -48,7 +48,6 @@ const Home = ({base_url}) => {
               return response.json();
             })
             .then(data => {
-              console.log("The response", data);
               fetchTodosByUser();
             })
             .catch(error => {
@@ -68,7 +67,8 @@ const Home = ({base_url}) => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            setDisplayTasks(data.data);
+            const sortedData = data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+            setDisplayTasks(sortedData);
         } catch (error) {
             console.error("Error fetching todos:", error);
         }
@@ -81,7 +81,8 @@ const Home = ({base_url}) => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            setDisplayTasks(data.data);
+            const sortedData = data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+            setDisplayTasks(sortedData);
         } catch (error) {
             console.error("Error fetching todos:", error);
         }
@@ -103,7 +104,6 @@ const Home = ({base_url}) => {
                 return response.json();
             })
             .then(data => {
-                console.log("Todo status updated", data);
                 fetchTodosByUser(); // Refresh the list after updating
             })
             .catch(error => {
@@ -131,7 +131,6 @@ const Home = ({base_url}) => {
     // todoObject = null meanes we are inserting a new items
     // todoObject != null menas we updating an existing item 
     const toggleBanner = (todoInfo=null, todoObject=null, bannerType='create',  toBeEditedTodo=null) =>{
-        console.log("Toggle Banner ", bannerType);
         if (bannerType==='create'){
             setBanner(!banner);
         }

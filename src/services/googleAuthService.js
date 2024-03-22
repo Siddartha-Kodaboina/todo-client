@@ -79,7 +79,7 @@ export const confirmThePasswordReset = ({oobCode, new_password}) => {
   // console.log(oobCode, new_password);
   confirmPasswordReset(auth, oobCode, new_password)
     .then(() => {
-      console.log("Password rest successful!");
+      console.log("Password reset successful!");
     })
     .catch((error) => {
       console.error("Error during sign in confirmThePasswordReset: ", error);
